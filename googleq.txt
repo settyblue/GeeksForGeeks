@@ -1,0 +1,37 @@
+class CircularQueue{
+	private int[] array;
+	private int start;
+	private int end;
+	private int size;
+	private int capacity;
+	
+	CircularQueue(int capacity){
+		this.capacity = capacity;
+		this.array = new int[capacity];
+		this.start = 0;
+		this.end = 0;
+		this.size = 0;
+	}
+
+	public boolean add(int element){
+		if(size == capacity){
+			return false;
+		}else{
+			this.array[end] = element;
+			this.end = (this.end+1)%this.capacity;
+			this.size++;
+			return true;
+		}
+	}
+
+	public int remove() throws Exception{
+		if(size == 0){
+			throw new Exception(“”);
+		}else{
+			int returnValue = this.array[start];
+			this.start = (this.start+1)%this.capacity;
+			this.size--;
+			return returnValue;
+		}
+	}	
+}
