@@ -15,7 +15,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println("Hello World.");
 		int[] array = {1, 2, 3, 4, 4, 4, 4};
-		int x = 4;
+		int x = 3;
 		int n = 6;
 		if(isMajorityBinary(array,n,x)){
 			System.out.println(x+" is majority in given array.");
