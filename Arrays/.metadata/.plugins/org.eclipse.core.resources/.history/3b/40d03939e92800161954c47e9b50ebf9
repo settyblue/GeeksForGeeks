@@ -1,0 +1,49 @@
+/**
+ * Write a function to find if a given integer x appears more 
+ * than n/2 times in a sorted array of n integers.
+ * http://www.geeksforgeeks.org/check-for-majority-element-in-a-sorted-array/
+ */
+package checkMajority;
+
+/**
+ * @author rakshith
+ *
+ */
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello World.");
+		int[] array = {1, 2, 3, 4, 4, 4, 4};
+		int x = 4;
+		int n = 6;
+		if(isMajorityBinary(array,n,x)){
+			System.out.println(x+" is majority in given array.");
+		}else{
+			System.out.println(x+" is not majority in given array.");
+		}
+	}
+
+	//Using linear search.
+	private static boolean isMajority(int[] array, int n, int x) {
+		int middleIndex = (n%2==0) ?(n/2) : (n/2+1);
+		for (int i=0; i<middleIndex+1; i++){
+			if(array[i]==x && array[i+n/2]==x){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	//Using binary search.
+	private static boolean isMajorityBinary(int[] array, int n, int x) {
+		// First index of occurrence of x in array.
+		int index = binarySearch(array,0,n-1);
+		return false;
+	}
+
+	private static int binarySearch(int[] array, int i, int j) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}
