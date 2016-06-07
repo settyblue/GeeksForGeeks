@@ -5,4 +5,4 @@
 *.project
 *.settings
 *bin
-.gitignore
+*.gitignore
