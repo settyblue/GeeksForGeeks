@@ -1,4 +1,5 @@
-http://www.geeksforgeeks.org/check-for-majority-element-in-a-sorted-array/
+﻿http://www.geeksforgeeks.org/check-for-majority-element-in-a-sorted-array/
+https://www.careercup.com/question?id=5647871593414656
 Check for Majority Element in a sorted array
 Question: Write a function to find if a given integer x appears more than n/2 times in a sorted array of n integers.
 
