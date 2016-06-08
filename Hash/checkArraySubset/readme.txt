@@ -11,3 +11,7 @@
  Implemented using Hashset.
  Time Complexity = O(m+n)
  Drawback of this method is that it doesnt account if the array has repeated elements.
+
+ Solution 2:
+ -----------
+ Implemented using sorting to overcome the previous drawback.
