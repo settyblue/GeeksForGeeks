@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * http://www.geeksforgeeks.org/longest-consecutive-subsequence/
@@ -16,11 +17,13 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
-		int[] array={1, 9, 4, 10, 3, 20, 2};
-		printLengthOfLongestConsecutiveSubsequence(array);
+		//int[] array={1, 9, 4, 10, 3, 20, 2};
+		//printLengthOfLongestConsecutiveSubsequence(array);
+		Integer[] array={2, 9, 1, 10, 3, 20, 2};
+		printLengthOfLongestConsecutiveSubsequence2(array);
 
 	}
-	
+
 	//Implemented using sorting.
 	private static void printLengthOfLongestConsecutiveSubsequence(int[] array) {
 		int prevInt = array[0];
@@ -41,5 +44,26 @@ public class Main {
 		
 		System.out.println("Maximum subsequence length : "+maxLength);
 	}
-
+	
+	//Implemented using hashing.
+	private static void printLengthOfLongestConsecutiveSubsequence2(Integer[] array) {
+		HashSet<Integer> set = new HashSet<Integer>();
+		set.addAll(Arrays.asList(array));
+		int curLength, curElem;
+		int maxLength = 0;
+		for(int i=0; i<set.size(); i++){
+			if(set.contains(array[i]-1)){
+				continue;
+			}
+			curLength = 0;
+			curElem = array[i];
+			while(set.contains(curElem)){
+				curElem++;
+				curLength++;
+			}
+			maxLength = Math.max(maxLength, curLength);
+		}
+		
+		System.out.println("Maximum subsequence length : "+maxLength);
+	}
 }

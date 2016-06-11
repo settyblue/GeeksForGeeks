@@ -11,3 +11,8 @@
  -----------
  Implemented using sorting.
  Time Complexity = O(nlogn)
+
+ Solution 2:
+ -----------
+ Implemented using hashset.
+ Time COmplexity = O(n)
