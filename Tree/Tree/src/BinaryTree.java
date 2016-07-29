@@ -13,6 +13,10 @@ import static java.lang.Math.max;
 public class BinaryTree<T> {
 	public Node<T> root;
 	
+	BinaryTree(){
+		this.root = null;
+	}
+	
 	BinaryTree(Node<T> node){
 		this.root = node;
 	}
@@ -120,9 +124,18 @@ public class BinaryTree<T> {
 		return 1+max(depth(node.getLeft()),depth(node.getRight()));
 	}
 	
+	public int height(){
+		return this.depth();
+	}
+	
 	public int diameter(){
 		if(this.root == null)return 0;
 		return this.root.diameter();
+	}
+	
+	public int diameterOptimized(){
+		if(this.root == null)return 0;
+		return this.root.diameterOptimized();
 	}
 	
 	public Node<T> getRoot() {
