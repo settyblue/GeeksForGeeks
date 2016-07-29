@@ -34,7 +34,7 @@ public class Main {
 		public static Comparator<Interval> compareByStartTime = new Comparator<Interval>(){
 			
 			public int compare(Interval i1, Interval i2){
-				return i2.start - i1.start;
+				return i1.start - i2.start;
 			}
 		};
 		
@@ -45,6 +45,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		TreeSet<Interval> set = new TreeSet<Interval>();
+		//TreeSet<Interval> set = new TreeSet<Interval>(Interval.compareByStartTime);
 		set.add(new Interval(3,4));
 		set.add(new Interval(1,2));
 		set.add(new Interval(5,7));
