@@ -13,6 +13,12 @@ public class Node<T> {
 	public Node<T> left;
 	public Node<T> right;
 	
+	Node (){
+		this.data = null;
+		this.left = null;
+		this.right = null;
+	}
+	
 	Node (T data){
 		this.data = data;
 		this.left = null;
@@ -54,6 +60,10 @@ public class Node<T> {
 		int leftDepth = this.getLeft()!= null ? this.getLeft().depth() : 0;
 		int rightDepth = this.getRight() != null ? this.getRight().depth() : 0;
 		return 1+max(leftDepth,rightDepth);
+	}
+	
+	public int height(){
+		return this.depth();
 	}
 	
 	//TODO: simplify
