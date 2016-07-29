@@ -37,7 +37,7 @@ public class Main {
 			}
 		}
 		
-		System.out.println("longest incresing subsequence length is "+lis[0][1]);
+		System.out.println("longest increasing subsequence length is "+lis[0][1]);
 		
 		/*
 		for(int i=0;i<n;i++){
