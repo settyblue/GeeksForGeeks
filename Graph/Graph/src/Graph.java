@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 /**
  * http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/
  * 
@@ -12,6 +13,7 @@ public class Graph {
 	
 	private int vertices;
 	private int edges;
+	private boolean directional = false;
 	private ArrayList<ArrayList<Integer>> adjList;
 	
 	Graph(int vertices, int edges){
@@ -19,8 +21,13 @@ public class Graph {
 		this.edges = edges;
 		adjList = new ArrayList<>();
 		for(int i=0; i<vertices; i++){
-			adjList.set(i, new ArrayList<Integer>()) ;
+			adjList.add(new ArrayList<Integer>()) ;
 		}
+	}
+	
+	Graph(int vertices, int edges, boolean directional){
+		this(vertices,edges);
+		this.directional = directional;
 	}
 	
 	public void addEdge(int v1, int v2){
@@ -54,10 +61,26 @@ public class Graph {
 		this.edges = edges;
 	}
 
-	public void DFS(int startVertex) {
+	public void BFS(int startVertex) {
 		boolean[] visited = new boolean[this.vertices];
+		ArrayList<Integer> queue = new ArrayList<Integer>();
+		queue.add(startVertex);
 		
+		while(!queue.isEmpty()){
+			int head = (int) queue.get(0);
+			if(!visited[head]){
+				visited[head] = true;
+				for(Integer to:this.adjList.get(head)){
+					queue.add(to);
+				}
+				System.out.println("visited node :"+head+" "+queue);
+			}else{
+				queue.remove(0);
+			}
+		}
 	}
 	
-	
+	public void DFS(int startVertex){
+		
+	}
 }
