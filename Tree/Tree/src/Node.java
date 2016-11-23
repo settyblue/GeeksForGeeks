@@ -5,7 +5,7 @@ import static java.lang.Math.max;
  */
 
 /**
- * @author rakshith
+ * @author Rakshith Kunchum
  *
  */
 public class Node<T> {
@@ -24,7 +24,25 @@ public class Node<T> {
 		this.left = null;
 		this.right = null;
 	}
-
+	
+	public void printInOrder(){
+		if(this.getLeft() != null)this.getLeft().printInOrder();
+		System.out.print(this.getData()+"\t");
+		if(this.getRight() != null)this.getRight().printInOrder();
+	}
+	
+	public void printPreOrder(){
+		System.out.print(this.getData()+"\t");
+		if(this.getLeft() != null)this.getLeft().printPreOrder();
+		if(this.getRight() != null)this.getRight().printPreOrder();
+	}
+	
+	public void printPostOrder(){
+		if(this.getLeft() != null)this.getLeft().printPostOrder();
+		if(this.getRight() != null)this.getRight().printPostOrder();
+		System.out.print(this.getData()+"\t");
+	}
+	
 	public T getData() {
 		return data;
 	}
@@ -157,4 +175,20 @@ public class Node<T> {
 		}
 		return max(widthThruRoot,max(leftDiameter,rightDiameter));
 	}
+	
+	public void printNodeAtKDistance(int k){
+		if(k == 0){
+			System.out.print(this.data+" ");
+			return;
+		}else{
+			if(this.right != null){
+				this.right.printNodeAtKDistance(k-1);
+			}
+			if(this.left != null){
+				this.left.printNodeAtKDistance(k-1);
+			}
+			return;
+		}
+	}
+	
 }
