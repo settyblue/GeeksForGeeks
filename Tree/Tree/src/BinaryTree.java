@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.TreeMap;
+
 import static java.lang.Math.max;
 //import static java.lang.Math.min;
-/**
- * 
- */
 
 /**
- * @author rakshith
+ * @author Rakshith Kunchum
  *
  */
 public class BinaryTree<T> {
@@ -23,41 +22,20 @@ public class BinaryTree<T> {
 	
 	public void printPostOrder(){
 		if(this.root == null)return;
-		printPostOrder(this.root);
+		this.root.printPostOrder();
 		System.out.println();
 	}
 	
 	public void printInOrder(){
 		if(this.root == null)return;
-		printInOrder(this.root);
+		this.getRoot().printInOrder();
 		System.out.println();
 	}
 	
 	public void printPreOrder(){
 		if(this.root == null)return;
-		printPreOrder(this.root);
+		this.root.printPreOrder();
 		System.out.println();
-	}
-	
-	public void printPostOrder(Node<T> node){
-		if(node==null)return;
-		printPostOrder(node.left);
-		printPostOrder(node.right);
-		System.out.print(node.data+"\t");
-	}
-	
-	public void printInOrder(Node<T> node){
-		if(node==null)return;
-		printInOrder(node.left);
-		System.out.print(node.data+"\t");
-		printInOrder(node.right);
-	}
-	
-	public void printPreOrder(Node<T> node){
-		if(node==null)return;
-		System.out.print(node.data+"\t");
-		printPreOrder(node.left);
-		printPreOrder(node.right);
 	}
 	
 	public void printLevelOrder(){
@@ -162,6 +140,33 @@ public class BinaryTree<T> {
 	public int leafNodeCount(){
 		if(this.root == null)return 0;
 		return this.root.leafNodesCount();
+	}
+	
+	public void printVerticalSum(){
+		if(!(this.root.data instanceof Integer)){
+			System.out.println("vertical sum can be called only for tree of type Integer.");
+			return;
+		}
+		TreeMap<Integer,Integer> sumMap = new TreeMap<>();
+		computeVerticalSum(this.root,sumMap,0);
+		for(int i:sumMap.keySet()){
+			System.out.print(sumMap.get(i)+" ");
+		}
+	}
+
+	private void computeVerticalSum(Node<T> node, TreeMap<Integer, Integer> sumMap, int verticalIndex) {
+		if(node == null){
+			return;
+		}
+		
+		if(sumMap.containsKey(verticalIndex)){
+			sumMap.put(verticalIndex, sumMap.get(verticalIndex)+(Integer)node.getData());
+		}else{
+			sumMap.put(verticalIndex, (Integer)node.getData());
+		}
+		
+		computeVerticalSum(node.left, sumMap, verticalIndex-1);
+		computeVerticalSum(node.right, sumMap, verticalIndex+1);
 	}
 	
 }
