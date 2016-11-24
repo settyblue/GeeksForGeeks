@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Graph g = new Graph(4,0);
+		Graph g = new Graph(4,0,true);
 		 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
@@ -21,7 +21,7 @@ public class Main {
  
         System.out.println("Following is Depth First Traversal");
  
-        g.DFS(0);
+        g.BFS(0);
 
 	}
 
