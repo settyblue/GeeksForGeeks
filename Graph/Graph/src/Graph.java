@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 /**
  * http://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/
@@ -82,5 +83,31 @@ public class Graph {
 	
 	public void DFS(int startVertex){
 		
+	}
+
+	public void printTopologicalSort() {
+		int n = this.vertices;
+		boolean[] visited = new boolean[n];
+		Stack<Integer> topologicalOrder = new Stack<>();
+		Integer numOfVisited = 0;
+		int current = 0;
+		while(current < n){
+			if(!visited[current])startVisit(current, visited, topologicalOrder);
+			current++;
+		}
+		while(!topologicalOrder.isEmpty()){
+			System.out.print(topologicalOrder.pop()+" ");
+		}
+		return;
+	}
+
+	private void startVisit(int i, boolean[] visited, Stack<Integer> topologicalOrder) {
+		if(!visited[i]){
+			visited[i] = true;
+			for(int neighbour:adjList.get(i)){
+				startVisit(neighbour, visited, topologicalOrder);
+			}
+			topologicalOrder.push(i);
+		}
 	}
 }
