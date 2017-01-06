@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -48,6 +50,20 @@ public class BSTree <K extends Comparable<? super K>> {
 		}
 	}
 	
+	public K inOrderSuccessor(K key){
+		if(this.root == null){
+			return null;
+		}else{
+			return inOrderSuccessor(this.root, key);
+		}
+	}
+	
+	public ArrayList<K> toList() {
+		ArrayList<K> inOrderList = new ArrayList<K>();
+		populateInOrderList(this.root, inOrderList);
+		return inOrderList;
+	}
+
 	@Override
 	public String toString(){
 		if(this.root == null){
@@ -56,7 +72,15 @@ public class BSTree <K extends Comparable<? super K>> {
 			return serialized(this.root);
 		}
 	}
-
+	
+	public String treeOrder() {
+		if(this.root == null){
+			return "";
+		}else{
+			return treeOrder(this.root);
+		}
+	}
+	
 	//Method implementations.
 	private boolean lookup(BSTNode<K> node, K key) {
 		if(node == null){
@@ -140,6 +164,49 @@ public class BSTree <K extends Comparable<? super K>> {
 		}
 	}
 	
+	private K inOrderSuccessor(BSTNode<K> node, K key) {
+		//Precondition: node is not null;
+		if(node == null){
+			System.out.println("Node with given key doesn't exist.");
+			return null;
+		}
+		
+		if(node.getKey().equals(key)){
+			if(node.getRight() != null){
+				return smallest(node.getRight());
+			}else{
+				K returnValue = null;
+				BSTNode<K> tempNode = this.root;
+				while(tempNode != null){
+					if(tempNode.getKey().compareTo(key) > 0){
+						returnValue = tempNode.getKey();
+						tempNode = tempNode.getLeft();
+					}else if(tempNode.getKey().equals(key)){
+						return returnValue;
+					}else{
+						tempNode = tempNode.getRight();
+					}
+				}
+				return null;
+			}
+		}else if(node.getKey().compareTo(key) > 0){
+			return inOrderSuccessor(node.getLeft(), key);
+		}else{
+			return inOrderSuccessor(node.getRight(), key);
+		}
+	}
+	
+	private void populateInOrderList(BSTNode<K> node, ArrayList<K> inOrderList) {
+		if(node == null){
+			return;
+		}else{
+			populateInOrderList(node.getLeft(),inOrderList);
+			inOrderList.add(node.getKey());
+			populateInOrderList(node.getRight(),inOrderList);
+			return;
+		}
+	}
+	
 	private String serialized(BSTNode<K> node) {
 		if(node == null){
 			return "";
@@ -147,5 +214,18 @@ public class BSTree <K extends Comparable<? super K>> {
 			return serialized(node.getLeft())+node.getKey().toString()+", "+
 					serialized(node.getRight());
 		}
+	}
+
+	private String treeOrder(BSTNode<K> node) {
+		StringBuffer returnString = new StringBuffer("");
+		returnString.append(node.getKey());
+		if(node.getLeft() != null && node.getRight() == null){
+			returnString.append(" < left="+treeOrder(node.getLeft())+" >");
+		}else if(node.getLeft() == null && node.getRight() != null){
+			returnString.append(" < right="+treeOrder(node.getRight())+" >");
+		}else if(node.getLeft() != null && node.getRight() != null){
+			returnString.append(" < left="+treeOrder(node.getLeft())+", right="+treeOrder(node.getRight())+" >");
+		}
+		return returnString.toString();
 	}
 }
