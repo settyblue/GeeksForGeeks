@@ -21,6 +21,15 @@ public class BSTree <K extends Comparable<? super K>> {
 		this.root = node;
 	}
 	
+	//Getters and setters
+	public BSTNode<K> getRoot(){
+		return this.root;
+	}
+	
+	public void setRoot(BSTNode<K> node){
+		this.root = node;
+	}
+	
 	//Tree Methods.
 	public boolean lookup(K key) {
 	    return lookup(this.root, key);
@@ -50,6 +59,22 @@ public class BSTree <K extends Comparable<? super K>> {
 		}
 	}
 	
+	public K ceil(K key){
+		if(this.root == null){
+			return null;
+		}else{
+			return ceil(this.root,key);
+		}
+	}
+	
+	public K floor(K key){
+		if(this.root == null){
+			return null;
+		}else{
+			return floor(this.root,key);
+		}
+	}
+	
 	public K inOrderSuccessor(K key){
 		if(this.root == null){
 			return null;
@@ -63,7 +88,16 @@ public class BSTree <K extends Comparable<? super K>> {
 		populateInOrderList(this.root, inOrderList);
 		return inOrderList;
 	}
-
+	
+	public void printKeysInRange(K key1,K key2){
+		if(this.root == null){
+			return;
+		}else{
+			printKeysInRange(this.root, key1, key2);
+			System.out.println();
+		}
+	}
+	
 	@Override
 	public String toString(){
 		if(this.root == null){
@@ -164,6 +198,43 @@ public class BSTree <K extends Comparable<? super K>> {
 		}
 	}
 	
+	
+	private K ceil(BSTNode<K> node, K key){
+		if(node == null){
+			return null;
+		}
+		
+		if(node.getKey().equals(key)){
+			return key;
+		}else if(node.getKey().compareTo(key) < 0){
+			return ceil(node.getRight(),key);
+		}else{
+			K value = ceil(node.getLeft(), key);
+			if(value == null){
+				return node.getKey();
+			}else{
+				return value;
+			}
+		}
+	}
+	
+	private K floor(BSTNode<K> node, K key){
+		
+		if(node == null){
+			return null;
+		}else if(node.getKey().equals(key)){
+			return key;
+		}else if(node.getKey().compareTo(key) > 0){
+			return floor(node.getLeft(), key);
+		}else{
+			K value = floor(node.getRight(), key);
+			if(value == null){
+				return node.getKey();
+			}else{
+				return value;
+			}
+		}
+	}
 	private K inOrderSuccessor(BSTNode<K> node, K key) {
 		//Precondition: node is not null;
 		if(node == null){
@@ -204,6 +275,23 @@ public class BSTree <K extends Comparable<? super K>> {
 			inOrderList.add(node.getKey());
 			populateInOrderList(node.getRight(),inOrderList);
 			return;
+		}
+	}
+	
+	private void printKeysInRange(BSTNode<K> node, K key1, K key2) {
+		
+		if(node == null){
+			return;
+		}
+		
+		if(node.getKey().compareTo(key1) > 0){
+			printKeysInRange(node.getLeft(), key1, key2);
+		}
+		if(node.getKey().compareTo(key1) >=0 && node.getKey().compareTo(key2) <= 0){
+			System.out.print(node.getKey()+", ");
+		}
+		if(node.getKey().compareTo(key2) < 0){
+			printKeysInRange(node.getRight(), key1, key2);
 		}
 	}
 	
